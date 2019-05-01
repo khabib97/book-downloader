@@ -8,10 +8,10 @@ This application will help you to download and manage resources from doc.lagout.
 5. bs4
 
 package installation command :
-$ pip install <package-name>
+$ pip install package-name
 
 # To Run
 $ python book-downloader.py
 
 Note : 
-All bookes will be downloaded into : <Current Dir>/Books ... folder 
+All bookes will be downloaded into (Current Directory) : /Books ... folder 
