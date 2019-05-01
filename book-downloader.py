@@ -41,20 +41,17 @@ def downloader(url):
         decodedURL = urllib.parse.unquote(url)
         dirPath = getDirectory(decodedURL)
         wget.download(decodedURL, dirPath)
-        #print("Download: "+ decodedURL)
+        print("\nDownload Complete: "+ decodedURL)
     else :
         response = requests.get(url)
         #print(response.status_code)
         soup = BeautifulSoup(response.text, "html.parser")
         for i in range(1,len(soup.findAll('a'))):
             current_a = soup.findAll('a')[i]['href']
-            if "http://" in current_a or "https://" in current_a :
-                print("BAD PARSING :" + current_a)
-            else :
+            if "http://" not in current_a or "https://" not in current_a :
+                #print("BAD PARSING :" + current_a)
                 current_url  = url + current_a
                 #print("Recursive call :" + current_url)
                 downloader(current_url)
-
-
 
 downloader(url)
