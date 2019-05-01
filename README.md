@@ -14,4 +14,6 @@ $ pip install package-name
 $ python book-downloader.py
 
 Note : 
-All bookes will be downloaded into (Current Directory) : /Books ... folder 
+1. All bookes will be downloaded into (Current Directory) : /Books ... folder 
+2. It will take around 1-2 hr to complete all resources based on your internet speed
+
