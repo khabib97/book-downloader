@@ -21,7 +21,7 @@ def generateFolder(dirName):
         if not os.path.exists(dirName):
             os.makedirs(dirName)
     except Exception:
-        print("\nError creating folder...")
+        print('\nError creating folder...')
         traceback.print_exc() 
 
 def getDirectory(url):
@@ -36,35 +36,50 @@ def getDirectory(url):
         print("Directory name cereation error...")
         traceback.print_exc()
         
-
     generateFolder(dirPath)
     return dirPath
 
+def isFileExists(fileName,path):
+    try:
+        path += '/'+ fileName
+        return os.path.exists(path)
+    except Exception :
+        traceback.print_exc()
+        return False
+
+def getFileName(url):
+    splitedURL = url.split('/')
+    return splitedURL[-1]
+
 def download(url,path):
+    fileName = getFileName(url)
     try :
-        wget.download(url, path)
-        print("\nDownload Complete: "+ url)
+        if not isFileExists(fileName,path) :
+            wget.download(url, path)
+            print('\n>> ' + path+'/' + fileName + ' 100% complete')
     except Exception:
-        print("\nError downloading file "+ url + " ...")
+        print("\nError downloading file "+ url)
         traceback.print_exc()
 
 def downloader(url):
     response = requests.head(url)
     if response.status_code != 200 :
-        print('Request failed') 
+        pass 
     elif isDownloadable(response.headers['Content-Type']) :
         decodedURL = urllib.parse.unquote(url)
         dirPath = getDirectory(decodedURL)
         download(decodedURL,dirPath)
     else :
         response = requests.get(url)
-        soup = BeautifulSoup(response.text, "html.parser")
+        soup = BeautifulSoup(response.text, 'html.parser')
         for i in range(1,len(soup.findAll('a'))):
             current_a = soup.findAll('a')[i]['href']
-            if "http://" not in current_a or "https://" not in current_a :
+            if 'http://' not in current_a or 'https://' not in current_a :
                 #print("BAD PARSING :" + current_a)
                 current_url  = url + current_a
                 #print("Recursive call :" + current_url)
                 downloader(current_url) 
 
+print('\n@Author : Kawser Habib\n@Email : kawser.habib.dev@gmail.com\n@Book Source : doc.lagout.org\n')
+print('Downloading...')
 downloader(url)
