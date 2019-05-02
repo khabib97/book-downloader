@@ -81,5 +81,7 @@ def downloader(url):
                 downloader(current_url) 
 
 print('\n@Author : Kawser Habib\n@Email : kawser.habib.dev@gmail.com\n@Book Source : doc.lagout.org\n')
+print('Total size : around 25 GB')
+print('Note : Any exceptional issues, just start the application again...\n')
 print('Downloading...')
 downloader(url)
