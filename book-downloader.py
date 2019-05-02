@@ -32,10 +32,10 @@ def getDirectory(url):
         for i in range(0,len(dirPathArr)) :
             dirPath += '/'+ dirPathArr[i]
     except Exception:
+        dirPath = 'Books'
         print("Directory name cereation error...")
         traceback.print_exc()
-    finally:
-        dirPath = 'Books'
+        
 
     generateFolder(dirPath)
     return dirPath
